@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+	<style>:root{--bg: #fbfaf7;--fg: #1d1d1b;--muted: #6b6a66;--line: #e3e0d8;--accent: #2f6f5e;--warn: #b4501f;--warn-bg: #fbeee6;--note-bg: #eef5f2;--mono: ui-monospace, "Cascadia Code", Menlo, monospace}@media(prefers-color-scheme:dark){:root{--bg: #171716;--fg: #ecebe6;--muted: #9c9a93;--line: #34332f;--accent: #6fbfa6;--warn: #f0905d;--warn-bg: #3a2418;--note-bg: #1d2c27}}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,sans-serif}.kb table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}.kb th,.kb td{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left}.kb code{font-family:var(--mono);font-size:.88em}.kb a{color:var(--accent)}.kb.svelte-60g32v{max-width:760px;margin:0 auto;padding:2rem 16px 4rem}.crumb.svelte-60g32v{font:.8rem var(--mono);text-decoration:none;color:var(--muted)}h1.svelte-60g32v{margin:.25rem 0 .5rem;line-height:1.2}.meta.svelte-60g32v{display:flex;flex-wrap:wrap;gap:.5rem 1rem;color:var(--muted);font-size:.85rem;margin:0}.status.svelte-60g32v{border:1px solid var(--line);border-radius:99px;padding:0 .6rem}.stale.svelte-60g32v{color:var(--warn);font-weight:600}.banner.svelte-60g32v{background:var(--warn-bg);color:var(--warn);padding:.6rem 1rem;border-radius:6px}footer.svelte-60g32v{margin-top:3rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:1rem}
+
+.sum.svelte-5f1c7s{font-size:1.1rem}.tags.svelte-5f1c7s,.note.svelte-5f1c7s{color:var(--muted);font-size:.85em}.wrong.svelte-5f1c7s td:where(.svelte-5f1c7s){background:var(--warn-bg)}.wrong.svelte-5f1c7s td:where(.svelte-5f1c7s):last-child{color:var(--warn);font-weight:600}
+
+.stamp.svelte-5qojh0{margin:2rem 0 0;font:.85rem var(--mono);color:var(--muted)}.stamp.svelte-5qojh0 b:where(.svelte-5qojh0){color:var(--accent);letter-spacing:.04em}.missing.svelte-5qojh0{color:var(--warn)}
+</style>
+		<link href="../../_app/immutable/assets/runbook.9BJ9BomY.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/CauseTable.AZcnZ4nk.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/5.BjoaMlTP.css" rel="stylesheet" disabled media="(max-width: 0)"><!--[--><!--]--><title>#4471 · what the merged reports show · support kb</title>
+  </head>
+  <body>
+    <div style="display: contents"><!--[--><!--[--><!----><!----><div class="kb svelte-60g32v"><header><a class="crumb svelte-60g32v" href="/support-kb/kb">support desk · kb</a> <h1 class="svelte-60g32v">#4471 · what the merged reports show</h1> <p class="meta svelte-60g32v"><span>owner <b>aleksej-axiology</b></span> <span class="status open svelte-60g32v">open</span> <span class="svelte-60g32v">reviewed 2026-10-28 · 0 days ago</span></p></header> <!--[!--><!--]--> <main><p>The <a href="/support-kb/kb/incidents/4471">#4471 page</a> says one issue, one fix queued. The reports merged into it
+hold three problems, and each has a ticket of its own:</p> <ul><li><strong>parser</strong>, day-first dates read month first: <a href="https://github.com/aleksej-axiology/support-kb/issues/1" rel="nofollow">ticket #1</a>. Fixed by <code>fix(dates): parse dd/mm for eu locales</code> when #4471 closed.</li> <li><strong>hint</strong>, booking-v3 asks for the month first: <a href="https://github.com/aleksej-axiology/support-kb/issues/2" rel="nofollow">ticket #2</a>. Won’t fix: the booking-v3
+form is retired.</li> <li><strong>one-day move</strong>, the date shifts by a day: <a href="https://github.com/aleksej-axiology/support-kb/issues/3" rel="nofollow">ticket #3</a>. Open: neither change
+touches it.</li></ul> <h2>How many reports each covers</h2> <p>The desk’s own view of #4471, built from its export at render time. <code>parser</code> and <code>hint</code> are its
+rows. The one-day moves are its footnote: the desk files them under <code>parser</code> by tenant, so the
+parser count includes them.</p> <p class="sum svelte-5f1c7s"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr></thead><tbody><!--[--><tr class="svelte-5f1c7s"><td class="svelte-5f1c7s"><code>parser</code></td><td class="svelte-5f1c7s">379</td><td class="tags svelte-5f1c7s">parser ×356 · hint ×23</td><td class="svelte-5f1c7s">11</td><td class="svelte-5f1c7s">2026-04-01 → 2026-10-04</td><td class="svelte-5f1c7s">#4471</td></tr><tr class="svelte-5f1c7s wrong"><td class="svelte-5f1c7s"><code>hint</code></td><td class="svelte-5f1c7s">33</td><td class="tags svelte-5f1c7s">hint ×18 · parser ×15</td><td class="svelte-5f1c7s">3</td><td class="svelte-5f1c7s">2026-04-17 → 2026-09-22</td><td class="svelte-5f1c7s">not this ticket — no ticket of its own</td></tr><!--]--></tbody></table> <!--[--><!--[--><p class="note svelte-5f1c7s">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[!--><!--]--><!--]--><!----> <h2>parser: day-first dates read month first</h2> <p>The shared parser reads every date month first. A tenant whose locale writes the day first gets
+its dates back with day and month swapped: “7 April” goes out as “4 July”. This is the bug the
+#4471 page describes, and the fix queued there was for this one.</p> <h2>hint: booking-v3 asks for the month first</h2> <p>booking-v3 prints <code>MM/DD/YYYY</code> under its date field and then reads the date the tenant’s way, day
+first. People booking a day-first tenant through that form type what the hint tells them. The
+symptom is the same swap, so these reports read like <code>parser</code>, but the parser fix does not reach
+them: the form’s hint has to follow the tenant’s locale. Only reports that came in through a
+booking-v3 tenant’s <code>form</code> channel have this cause.</p> <h2>one-day move: the date shifts by a day</h2> <p>These are not swaps. “Tuesday 12 May” arrives as “Monday 11 May”, a client in Lisbon gets Tuesday
+while one in Toronto gets Monday, an invite arrives before the booking was made. The day moves and
+the month stays, which points at time zones, not at the parser.</p> <h2>How the reports were split</h2> <ul><li>One report per id. The export repeats some reports where its pages overlap.</li> <li>The cause comes from the tenant: its locale, its booking form, and the channel the report came
+in by (<code>causes.ts</code>). Intake’s tag is not used: intake tags <code>hint</code> whenever the reporter’s
+browser is en-US, whatever the tenant runs.</li> <li>The one-day moves are the desk’s own reading (<code>desk-notes.json</code>), checked against every report
+body: they are the only reports whose dates are not a day/month swap.</li></ul> <h2>Lessons</h2> <ul><li>A subject line says what someone saw, not why. “Month and day swapped?” turns up under every
+problem here, one-day moves included, so matching on subjects cannot keep them apart.</li> <li>Count a merged ticket by cause before marking it known. One fix per ticket is a claim the
+reports can check.</li></ul> <!--[--><p class="stamp svelte-5qojh0">desk ref <b class="svelte-5qojh0">DR-KJAP-MF91</b></p><!--]--><!----><!----></main> <footer class="svelte-60g32v">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]--></div>
+  </body>
+</html>
