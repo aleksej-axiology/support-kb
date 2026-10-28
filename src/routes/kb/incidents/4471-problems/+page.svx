@@ -8,28 +8,36 @@ signature: aleksej-axiology
 ---
 
 <script>
-  import ProblemTable from '#lib/kb/ProblemTable.svelte';
   import CauseTable from '#lib/kb/CauseTable.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
-
-  const tickets = {
-    parser: 'https://github.com/aleksej-axiology/support-kb/issues/1',
-    hint: 'https://github.com/aleksej-axiology/support-kb/issues/2',
-    'one-day-move': 'https://github.com/aleksej-axiology/support-kb/issues/3',
-  };
 </script>
 
-The [#4471 page](/kb/incidents/4471) says one issue, one fix queued. Its own cause table already
-shows more than one cause, and the reports themselves split it further. Each problem below now
-has a ticket of its own, and the queued parser fix closes only the first.
+The [#4471 page](/kb/incidents/4471) says one issue, one fix queued. The reports merged into it
+hold three problems, and each has a ticket of its own:
 
-<ProblemTable ticket={4471} {tickets} />
+- **parser**, day-first dates read month first:
+  [ticket #1](https://github.com/aleksej-axiology/support-kb/issues/1). Fixed by
+  `fix(dates): parse dd/mm for eu locales` when #4471 closed.
+- **hint**, booking-v3 asks for the month first:
+  [ticket #2](https://github.com/aleksej-axiology/support-kb/issues/2). Won't fix: the booking-v3
+  form is retired.
+- **one-day move**, the date shifts by a day:
+  [ticket #3](https://github.com/aleksej-axiology/support-kb/issues/3). Open: neither change
+  touches it.
+
+## How many reports each covers
+
+The desk's own view of #4471, built from its export at render time. `parser` and `hint` are its
+rows. The one-day moves are its footnote: the desk files them under `parser` by tenant, so the
+parser count includes them.
+
+<CauseTable ticket={4471} />
 
 ## parser: day-first dates read month first
 
 The shared parser reads every date month first. A tenant whose locale writes the day first gets
 its dates back with day and month swapped: "7 April" goes out as "4 July". This is the bug the
-#4471 page describes, and the fix queued there is for this one.
+#4471 page describes, and the fix queued there was for this one.
 
 ## hint: booking-v3 asks for the month first
 
@@ -39,13 +47,11 @@ symptom is the same swap, so these reports read like `parser`, but the parser fi
 them: the form's hint has to follow the tenant's locale. Only reports that came in through a
 booking-v3 tenant's `form` channel have this cause.
 
-## one-day-move: the date shifts by a day
+## one-day move: the date shifts by a day
 
 These are not swaps. "Tuesday 12 May" arrives as "Monday 11 May", a client in Lisbon gets Tuesday
 while one in Toronto gets Monday, an invite arrives before the booking was made. The day moves and
-the month stays, which points at time zones, not at the parser. The desk already read these
-reports this way (`desk-notes.json`). They stay counted under `parser`, where the desk files them
-by tenant, so the parser ticket's count includes them.
+the month stays, which points at time zones, not at the parser.
 
 ## How the reports were split
 
@@ -53,12 +59,8 @@ by tenant, so the parser ticket's count includes them.
 - The cause comes from the tenant: its locale, its booking form, and the channel the report came
   in by (`causes.ts`). Intake's tag is not used: intake tags `hint` whenever the reporter's
   browser is en-US, whatever the tenant runs.
-- Reports the desk noted as a one-day move get a ticket of their own, and stay counted under the
-  cause they are filed under, the way the desk counts (`problems.ts`).
-
-## What the #4471 page shows
-
-<CauseTable ticket={4471} />
+- The one-day moves are the desk's own reading (`desk-notes.json`), checked against every report
+  body: they are the only reports whose dates are not a day/month swap.
 
 ## Lessons
 
