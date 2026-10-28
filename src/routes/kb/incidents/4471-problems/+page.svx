@@ -4,7 +4,7 @@ title: '#4471 · what the merged reports show'
 owner: aleksej-axiology
 status: open
 reviewed: 2026-10-28
-signature: aleksej-axiology
+signature: v1.eyJzdWIiOiIzMTY5IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMDQ2OTMsImV4cCI6MTc5MzI5MTA5M30.b9qzqv6UMu7C8TE8xta2TqR0loBvCpzAew-ExM9YHHY
 ---
 
 <script>
