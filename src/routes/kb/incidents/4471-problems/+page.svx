@@ -1,0 +1,69 @@
+---
+layout: runbook
+title: '#4471 · what the merged reports show'
+owner: support desk
+status: open
+reviewed: 2026-10-28
+signature: aleksej-axiology
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const tickets = {
+    parser: 'https://github.com/aleksej-axiology/support-kb/issues/1',
+    hint: 'https://github.com/aleksej-axiology/support-kb/issues/2',
+    'one-day-move': 'https://github.com/aleksej-axiology/support-kb/issues/3',
+  };
+</script>
+
+The [#4471 page](/kb/incidents/4471) says one issue, one fix queued. Its own cause table already
+shows more than one cause, and the reports themselves split it further. Each problem below now
+has a ticket of its own, and the queued parser fix closes only the first.
+
+<ProblemTable ticket={4471} {tickets} />
+
+## parser: day-first dates read month first
+
+The shared parser reads every date month first. A tenant whose locale writes the day first gets
+its dates back with day and month swapped: "7 April" goes out as "4 July". This is the bug the
+#4471 page describes, and the fix queued there is for this one.
+
+## hint: booking-v3 asks for the month first
+
+booking-v3 prints `MM/DD/YYYY` under its date field and then reads the date the tenant's way, day
+first. People booking a day-first tenant through that form type what the hint tells them. The
+symptom is the same swap, so these reports read like `parser`, but the parser fix does not reach
+them: the form's hint has to follow the tenant's locale. Only reports that came in through a
+booking-v3 tenant's `form` channel have this cause.
+
+## one-day-move: the date shifts by a day
+
+These are not swaps. "Tuesday 12 May" arrives as "Monday 11 May", a client in Lisbon gets Tuesday
+while one in Toronto gets Monday, an invite arrives before the booking was made. The day moves and
+the month stays, which points at time zones, not at the parser. The desk already read these
+reports this way (`desk-notes.json`); the #4471 table still counts them under `parser`.
+
+## How the reports were split
+
+- One report per id. The export repeats some reports where its pages overlap.
+- The cause comes from the tenant: its locale, its booking form, and the channel the report came
+  in by (`causes.ts`). Intake's tag is not used: intake tags `hint` whenever the reporter's
+  browser is en-US, whatever the tenant runs.
+- Reports the desk noted as a one-day move are taken out of their cause and counted on their own
+  (`problems.ts`).
+
+## What the #4471 page shows
+
+<CauseTable ticket={4471} />
+
+## Lessons
+
+- A subject line says what someone saw, not why. "Month and day swapped?" turns up under every
+  problem here, one-day moves included, so matching on subjects cannot keep them apart.
+- Count a merged ticket by cause before marking it known. One fix per ticket is a claim the
+  reports can check.
+
+<RenderStamp {signature} />
