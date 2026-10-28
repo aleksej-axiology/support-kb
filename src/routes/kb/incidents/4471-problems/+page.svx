@@ -1,7 +1,7 @@
 ---
 layout: runbook
 title: '#4471 · what the merged reports show'
-owner: support desk
+owner: aleksej-axiology
 status: open
 reviewed: 2026-10-28
 signature: aleksej-axiology
