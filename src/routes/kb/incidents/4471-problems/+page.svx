@@ -44,7 +44,8 @@ booking-v3 tenant's `form` channel have this cause.
 These are not swaps. "Tuesday 12 May" arrives as "Monday 11 May", a client in Lisbon gets Tuesday
 while one in Toronto gets Monday, an invite arrives before the booking was made. The day moves and
 the month stays, which points at time zones, not at the parser. The desk already read these
-reports this way (`desk-notes.json`); the #4471 table still counts them under `parser`.
+reports this way (`desk-notes.json`). They stay counted under `parser`, where the desk files them
+by tenant, so the parser ticket's count includes them.
 
 ## How the reports were split
 
@@ -52,8 +53,8 @@ reports this way (`desk-notes.json`); the #4471 table still counts them under `p
 - The cause comes from the tenant: its locale, its booking form, and the channel the report came
   in by (`causes.ts`). Intake's tag is not used: intake tags `hint` whenever the reporter's
   browser is en-US, whatever the tenant runs.
-- Reports the desk noted as a one-day move are taken out of their cause and counted on their own
-  (`problems.ts`).
+- Reports the desk noted as a one-day move get a ticket of their own, and stay counted under the
+  cause they are filed under, the way the desk counts (`problems.ts`).
 
 ## What the #4471 page shows
 
